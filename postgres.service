@@ -1,0 +1,14 @@
+[Unit]
+Description=PostgreSQL server
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=always
+ExecStartPre=-/usr/bin/docker rm -f postgres
+ExecStart=/usr/bin/docker run --rm --name postgres --publish 5432:5432 --volume /media/state/postgres:/media/host postgres
+ExecStop=/usr/bin/docker stop postgres
+
+[Install]
+WantedBy=local.target
+

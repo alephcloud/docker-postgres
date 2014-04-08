@@ -1,0 +1,13 @@
+# DO NOT run this file on the host system!  It is meant to be used from within
+# the container, exactly once, to create a database on the passed-in state
+# volume.
+
+mkdir /media/host/data
+mkdir /media/host/config
+chown postgres:nogroup /media/host/data
+sudo -u postgres /usr/local/pgsql/bin/initdb -D /media/host/data
+cd /media/host/data
+mv postgresql.conf pg_hba.conf pg_ident.conf ../config/
+cd ../config
+chown root:root postgresql.conf pg_hba.conf pg_ident.conf
+chmod 644 postgresql.conf pg_hba.conf pg_ident.conf
