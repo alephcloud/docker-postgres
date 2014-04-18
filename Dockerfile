@@ -37,8 +37,8 @@ RUN cat /schebang.in /reformat.sh.in > /reformat.sh; \
     tar -jxvf postgresql-9.3.4.tar.bz2; \
     cd postgresql-9.3.4; \
     ./configure --with-openssl --with-ossp-uuid; \
-    make; \
-    make install; \
+    make world; \
+    make install-world; \
     cd ..; \
     rm -rf postgresql-9.3.4; \
     DEBIAN_FRONTEND=noninteractive apt-get purge -y \
